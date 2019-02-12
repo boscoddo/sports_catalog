@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+  <header>
+    <h2 class="font-weight-light">Edit Item</h2>
+  </header>
+  <div class="form-group">
+    <form method="post">
+      <h3>Name</h3>
+        <input type="text" name="name" placeholder="Enter new name">
+      <h3>Description</h3>
+        <input type="text" name="description" placeholder="Enter new description">
+      <h3>Price</h3>
+        <input type="text" name="price" placeholder="Enter new price">
+      <h3>Category</h3>
+        <select name="item_category">
+          {% for category in categories %}
+            <option value="{{ category.name }}">{{ category.name }}</option>
+          {% endfor %}
+        </select>
+        <div></div>
+      <div class="btn-group" role="group" aria-label="Submission buttons">
+        <button type="submit" class="btn btn-warning">Submit</button>
+        <a class="btn btn-secondary" href="{{ url_for('home') }}" role="button">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-sm-5">
+    <header>
+      <h2 class="font-weight-light">Categories</h2>
+    </header>
+  </div>
+  <div class="col-sm-5">
+    <header>
+      <h2 class="font-weight-light">Latest Items</h2>
+    </header>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-5">
+    <ul>
+      {% for category in categories %}
+        <li>
+          <a href="{{ url_for('show_category', category=category.name) | replace('%20', '%2D') }}">
+            {{ category.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="col-sm-7">
+    <ul>
+      {% for item in latest_items %}
+        <li>
+          <a href="{{ url_for('show_item', category=item.category.name, item=item.name) | replace('%20', '%2D') }}">
+            {{ item.name }} <em class="text-muted">({{ item.category.name }})</em>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+    {% if login_status %}
+      <a class="btn btn-warning mt-1" role="button" href="{{ url_for('add_item', category=category_name) }}">Add Item</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
